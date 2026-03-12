@@ -23,7 +23,7 @@ For each of the 5 ideas, provide:
 4. **Core Insight** — the ONE key takeaway the viewer should walk away with (1–2 sentences)
 5. **Talking Points** — 3–4 bullet points covering what the presenter should cover in order
 6. **CTA** — a natural call-to-action to end the reel (save, share, follow, comment, etc.)
-7. **Source** — cite the specific article or post this idea came from, with a URL
+7. **Source** — a short description of the source or inspiration (e.g. "RBI circular on UPI limits", "Budget 2025 Section 80C changes", "SEBI mutual fund regulation update"). Do NOT include URLs — just a brief descriptive label.
 
 ## Daily variety rules
 - Cover **at least 3 different topic categories** across the 5 ideas each day
@@ -43,7 +43,7 @@ Return your response as a JSON array of 5 objects with these exact fields:
 - core_insight (string)
 - talking_points (array of strings)
 - cta (string)
-- source_url (string)
+- source_url (string — a short descriptive label of the source, NOT a URL)
 
 Return ONLY the JSON array, no markdown fencing, no explanation.`;
 }

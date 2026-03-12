@@ -114,6 +114,10 @@ Return ONLY a JSON object with these fields: title, category, hook_line, core_in
     .select('*', { count: 'exact', head: true })
     .eq('batch_id', batch.id);
 
+  // Extract real URLs from the research text instead of trusting Claude's hallucinated ones
+  const urlMatch = combinedResearch.match(/https?:\/\/[^\s<>"')\]]+/);
+  const realSourceUrl = urlMatch ? urlMatch[0] : 'User Research';
+
   const { data: topic, error: topicError } = await supabase
     .from('topics')
     .insert({
@@ -125,7 +129,7 @@ Return ONLY a JSON object with these fields: title, category, hook_line, core_in
       core_insight: topicData.core_insight,
       talking_points: topicData.talking_points || [],
       cta: topicData.cta || '',
-      source_url: topicData.source_url || 'User Research',
+      source_url: realSourceUrl,
       status: 'script_requested',
     })
     .select()

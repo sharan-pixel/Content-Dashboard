@@ -107,6 +107,10 @@ export async function POST(request: NextRequest) {
     .select('*', { count: 'exact', head: true })
     .eq('batch_id', batch.id);
 
+  // Extract real URLs from the research text instead of trusting Claude's output
+  const urlMatch = combinedText.match(/https?:\/\/[^\s<>"')\]]+/);
+  const realSourceUrl = urlMatch ? urlMatch[0] : 'User Research';
+
   // Insert all topics with status 'pending'
   const topicRows = topicIdeas.map((t, i) => ({
     batch_id: batch!.id,
@@ -117,7 +121,7 @@ export async function POST(request: NextRequest) {
     core_insight: t.core_insight,
     talking_points: t.talking_points || [],
     cta: t.cta || '',
-    source_url: t.source_url || null,
+    source_url: realSourceUrl,
     status: 'pending',
   }));
 
