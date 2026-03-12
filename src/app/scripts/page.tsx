@@ -302,7 +302,7 @@ export default function ScriptsPage() {
                             minute: '2-digit',
                           })}
                         </span>
-                        {topic?.source_url && topic.source_url !== 'User Research' && (
+                        {topic?.source_url && topic.source_url !== 'User Research' && /^https?:\/\//.test(topic.source_url) ? (
                           <a
                             href={topic.source_url}
                             target="_blank"
@@ -312,6 +312,10 @@ export default function ScriptsPage() {
                           >
                             Source
                           </a>
+                        ) : (
+                          <span className="text-xs text-[var(--muted)]" onClick={(e) => e.stopPropagation()}>
+                            {topic?.source_url || 'User Research'}
+                          </span>
                         )}
                       </div>
                       {hasPerf && (() => {

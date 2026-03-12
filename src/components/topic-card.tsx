@@ -75,8 +75,8 @@ export function TopicCard({ topic, onGenerateScript, onDiscard, onViewScript, on
         </p>
       </div>
 
-      {topic.source_url && (
-        <div className="mb-4">
+      <div className="mb-4">
+        {topic.source_url && topic.source_url !== 'User Research' && /^https?:\/\//.test(topic.source_url) ? (
           <a
             href={topic.source_url}
             target="_blank"
@@ -85,8 +85,12 @@ export function TopicCard({ topic, onGenerateScript, onDiscard, onViewScript, on
           >
             Source &rarr;
           </a>
-        </div>
-      )}
+        ) : (
+          <span className="text-xs text-[var(--muted)]">
+            Source: {topic.source_url || 'User Research'}
+          </span>
+        )}
+      </div>
 
       <div className="flex gap-2 pt-3 border-t border-[var(--border)]">
         {topic.status === 'pending' && (
