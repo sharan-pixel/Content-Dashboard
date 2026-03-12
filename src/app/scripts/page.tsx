@@ -302,6 +302,17 @@ export default function ScriptsPage() {
                             minute: '2-digit',
                           })}
                         </span>
+                        {topic?.source_url && topic.source_url !== 'User Research' && (
+                          <a
+                            href={topic.source_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="text-xs text-[var(--accent)] hover:underline"
+                          >
+                            Source
+                          </a>
+                        )}
                       </div>
                       {hasPerf && (() => {
                         const p = performanceMap[script.id];
