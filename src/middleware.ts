@@ -3,9 +3,10 @@ import { NextRequest, NextResponse } from 'next/server';
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Allow auth routes, login page, and static assets
+  // Allow auth routes, login page, cron endpoints, and static assets
   if (
     pathname.startsWith('/api/auth') ||
+    pathname === '/api/topics/generate' ||
     pathname === '/login' ||
     pathname.startsWith('/_next') ||
     pathname === '/favicon.ico' ||
